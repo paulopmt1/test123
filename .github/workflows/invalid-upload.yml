@@ -1,0 +1,24 @@
+name: Publish Website
+
+on:
+  push:
+    branches:
+      - trunk #it should be main for this repository
+  workflow_dispatch:
+jobs:
+  Build-Artifact-Action:
+    name: Build-Artifact-Action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Install PHP dependencies
+        uses: php-actions/composer@v6
+        with:
+          dev: no
+          php_version: 7.4
+
+      - name: Upload the artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: somethingelse
